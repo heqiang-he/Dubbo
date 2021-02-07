@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+<!--将controller中的返回值打印在浏览器  -->
+<!-- <mvc:annotation-driven>
+<mvc:message-converters register-defaults="false">
+<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+<constructor-arg value="UTF-8" />
+</bean>
+</mvc:message-converters>
+</mvc:annotation-driven> -->
+
+<bean id="internalResourceViewResolver"
+      class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="prefix" value="/WEB-INF/jsp/"/>
+    <property name="suffix" value=".jsp"/>
+</bean>
+
+<!-- 配置dubbo的应用名称 -->
+  <dubbo:application name="students-web"></dubbo:application>
+  <!-- 配置注册中心地址  -->
+  <dubbo:registry protocol="dubbo" address="zookeeper://127.0.0.1:2181"></dubbo:registry>
+  
+  <!-- 配置dubbo扫描包 -->
+  <dubbo:annotation package="org.student.controller"/>  
+  
+  <context:component-scan base-package="org.student.controller"></context:component-scan>
+
+</beans>
