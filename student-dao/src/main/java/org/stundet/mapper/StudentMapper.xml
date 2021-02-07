@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="org.stundet.mapper.StudentMapper">
+    <select id="queryStedentByStuNo" parameterType="int" resultType="org.student.pojo.Student">
+       select * from student where stuNo = #{stuNo}
+    </select>
+    
+    <insert id="addStudent" parameterType="org.student.pojo.Student">
+       insert into student(stuno,stuname,stuage) values(#{stuNo},#{stuName},#{stuAge})
+    </insert>
+ </mapper>
